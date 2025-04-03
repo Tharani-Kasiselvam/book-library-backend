@@ -39,17 +39,17 @@ export const signup = async (req, res) => {
         })
 
         //JWT
-        if(userData){
-            const token = jwt.sign({id : userData._id}, 
-                process.env.JWT_SECRET, {expiresIn:'7d'})
+        // if(userData){
+        //     const token = jwt.sign({id : userData._id}, 
+        //         process.env.JWT_SECRET, {expiresIn:'h'})
 
-            res.cookie("token", token, {
-                httpOnly : true,
-                secure : process.env.MODE_ENV === "production",
-                sameSite : "strict",
-                maxAge : 7 * 24 * 60 * 60 * 1000
-            })
-        }
+        //     res.cookie("token", token, {
+        //         httpOnly : true,
+        //         secure : process.env.MODE_ENV === "production",
+        //         sameSite : "strict",
+        //         // maxAge : 7 * 24 * 60 * 60 * 1000 //7days
+        //     })
+        // }
 
         return res.status(200).json({user : userData, message: "User created successfully"})
 
@@ -82,15 +82,15 @@ export const login = async (req,res)=>{
        //jwt
        if (userData) {
         const token = jwt.sign({ id: userData._id }, process.env.JWT_SECRET, {
-          expiresIn: "7d",
+          expiresIn: "1h",
         });
   
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           // sameSite: "strict",
-          sameSite: "None",
-          maxAge: 7 * 24 * 60 * 60 * 1000,
+          sameSite: "None", 
+          // maxAge: 7 * 24 * 60 * 60 * 1000,
         });
       }
 
